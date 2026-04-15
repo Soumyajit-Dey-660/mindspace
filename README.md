@@ -119,3 +119,7 @@ uvicorn main:app --reload --port 3001
 | Variable | Required | Description |
 |---|---|---|
 | `OPENAI_API_KEY` | Yes | Powers chat, transcription, and TTS |
+
+## Try it out
+
+https://mindspace-gray.vercel.app/
