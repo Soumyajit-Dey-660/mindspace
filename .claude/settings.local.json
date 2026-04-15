@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)",
+      "Bash(powershell -Command \"Stop-Process -Id 16280 -Force\")",
+      "Bash(python -c ':*)",
+      "Bash(netstat -ano)",
+      "Bash(powershell -Command \"Stop-Process -Id 21520 -Force\")",
+      "Bash(uvicorn main:app --reload --host 0.0.0.0 --port 3001)",
+      "Bash(ping -n 3 127.0.0.1)",
+      "Bash(curl -s http://localhost:3001/api/health)",
+      "Bash(curl -s -X POST http://localhost:3001/api/chat -H \"Content-Type: application/json\" -d \"{\\\\\"message\\\\\":\\\\\"I have been feeling really anxious lately\\\\\",\\\\\"history\\\\\":[]}\")",
+      "Bash(python -c \"from dotenv import load_dotenv; import os; load_dotenv\\('G:/Projects/mindspace/server/.env'\\); print\\('Key set:', bool\\(os.getenv\\('OPENAI_API_KEY'\\)\\)\\)\")",
+      "Bash(python:*)",
+      "Bash(ping -n 4 127.0.0.1)",
+      "Bash(curl:*)",
+      "Bash(findstr \"5173 3001\")",
+      "Bash(python3 -m uvicorn main:app --reload --port 3001)",
+      "Bash(echo \"started PID $!\")",
+      "Read(//tmp/**)",
+      "Bash(/c/Users/soumy/AppData/Local/Programs/Python/Python311/python.exe -m uvicorn main:app --reload --port 3001)",
+      "Bash(echo \"PID: $!\")",
+      "Bash($PYTHON:*)",
+      "Bash(awk '{print $5}')",
+      "Bash(xargs -I{} cmd.exe /c \"taskkill /PID {} /F\")"
+    ]
+  }
+}
