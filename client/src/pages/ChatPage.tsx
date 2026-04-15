@@ -118,13 +118,6 @@ const LANG_PLACEHOLDERS: Record<RecordingLang, string> = {
   hi: 'कुछ भी कहो — यह तुम्हारी अपनी जगह है…',
 };
 
-// Detect language from Unicode ranges for TTS voice selection
-function detectSpeechLang(text: string): string {
-  if (/[\u0980-\u09FF]/.test(text)) return 'bn-BD'; // Bengali
-  if (/[\u0900-\u097F]/.test(text)) return 'hi-IN'; // Devanagari / Hindi
-  return 'en-US';
-}
-
 function pickRandom<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
