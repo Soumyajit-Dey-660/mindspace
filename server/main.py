@@ -185,9 +185,16 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="MindSpace API", lifespan=lifespan)
 
+def _allowed_origins() -> list[str]:
+    origins = ["http://localhost:5173"]
+    # FRONTEND_URL is set in Render's environment variables to the Vercel deployment URL
+    if url := os.getenv("FRONTEND_URL"):
+        origins.append(url.rstrip("/"))
+    return origins
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=_allowed_origins(),
     allow_methods=["POST", "GET"],
     allow_headers=["Content-Type"],
 )

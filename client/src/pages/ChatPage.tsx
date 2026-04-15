@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { apiUrl } from '../api';
 import './ChatPage.css';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -310,7 +311,7 @@ export default function ChatPage() {
 
   // Fetch remaining trials on mount
   useEffect(() => {
-    fetch(`/api/usage/${userId}`)
+    fetch(apiUrl(`/api/usage/${userId}`))
       .then(r => r.json())
       .then(d => {
         setRemainingTrials(d.remaining);
@@ -321,7 +322,7 @@ export default function ChatPage() {
 
   // Fetch conversation list (called on mount and after each AI reply)
   const fetchConversations = useCallback(() => {
-    fetch(`/api/conversations/${userId}`)
+    fetch(apiUrl(`/api/conversations/${userId}`))
       .then(r => r.ok ? r.json() : [])
       .then(setConversations)
       .catch(() => {});
@@ -366,7 +367,7 @@ export default function ChatPage() {
       formData.append('audio', file);
       formData.append('lang', lang);
 
-      const res = await fetch('/api/transcribe', { method: 'POST', body: formData });
+      const res = await fetch(apiUrl('/api/transcribe'), { method: 'POST', body: formData });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
         throw new Error(body.detail || 'Transcription failed');
@@ -470,7 +471,7 @@ export default function ChatPage() {
     ttsAbortRef.current = controller;
 
     try {
-      const res = await fetch('/api/tts', {
+      const res = await fetch(apiUrl('/api/tts'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text }),
@@ -535,7 +536,7 @@ export default function ChatPage() {
     setIsTyping(true);
 
     try {
-      const res = await fetch('/api/chat', {
+      const res = await fetch(apiUrl('/api/chat'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -630,7 +631,7 @@ export default function ChatPage() {
     setError(null);
 
     try {
-      const res = await fetch(`/api/conversations/${userId}/${conv.thread_id}`);
+      const res = await fetch(apiUrl(`/api/conversations/${userId}/${conv.thread_id}`));
       if (res.ok) {
         const data = await res.json();
         const loaded: Message[] = (data.messages as { role: string; text: string }[]).map(m => ({

@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: mindspace-api
+    runtime: python
+    rootDir: server
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false       # fill this in manually in the Render dashboard
+      - key: FRONTEND_URL
+        sync: false       # set to your Vercel URL after deploying the frontend
